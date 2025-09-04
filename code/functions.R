@@ -4,6 +4,9 @@ iata_path_rad <- "D:/DCAP_PACD/Group/RAD_DER/travel_data/iata"
 ## DCAP IATA data folder 
 iata_path_dcap <- "D:/DCAP_PACD/PUBLIC/IATA/"
 
+## save path
+save_path_rad <- "D:/DCAP_PACD/Group/RAD_DER/vhf"
+
 ## function to import travel data for specific airports
 import_iata <- function(x, origcodes, destcodes) { #origcodes and destcodes are vectors of 3-letter airport codes for origin and destination countries
   
@@ -38,5 +41,38 @@ import_iata <- function(x, origcodes, destcodes) { #origcodes and destcodes are 
   
   d <- d |> 
     filter(orig %in% origcodes & dest %in% destcodes)
+  
+}
+
+## function to process imported data
+process_iata <- function(x) {
+  
+  ## remove empty columns
+  x <- x |> 
+    select_if(~!(all(is.na(.) | str_detect(., "\\s+"))))
+  
+  ## convert npass to numeric
+  x <- x |> 
+    mutate(
+      npass2 = as.integer(str_extract(npass, "[0-9]+")),
+      ym = str_extract(source, "[0-9]{4}(?=\\.csv)"),
+      year = factor(paste0("20", str_sub(ym, 1, 2))),
+      month = factor(str_sub(ym, -2))
+    )
+  
+  ## extract month and year
+  x <- x |> 
+    rename_with(~ str_replace(., "X", "stop"))
+  
+  ## create date variables
+  x <- x |> 
+    mutate(
+      date = as.Date(paste(as.character(year), as.character(month), "15", sep = "-")),
+      ym = format(date, "%Y-%m")
+    )
+  
+  ## reorder columns
+  x <- x |> 
+    select(year, month, ym, date, orig, starts_with("stop"), dest, npass = npass2, source)
   
 }

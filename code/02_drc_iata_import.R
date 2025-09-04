@@ -53,3 +53,10 @@ sub_files <- all_files[start_file:end_file]
 ## IMPORT DATA
 ##################################################################################
 drc_iata <- map_dfr(sub_files, ~ import_iata(.x, origcodes = my_orig_airports, destcodes = my_dest_airports))
+drc_iata <- process_iata(drc_iata)
+
+##################################################################################
+## SAVE DATA
+##################################################################################
+save_filename <- paste(save_path_rad, "drc_arrivals.rds", sep = "/")
+saveRDS(drc_iata, file = save_filename)

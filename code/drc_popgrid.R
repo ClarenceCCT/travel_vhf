@@ -158,7 +158,18 @@ airport_dist_raster_invsq <- 1 / (airport_dist_raster^2)
 r2_weighted <- airport_dist_raster_invsq * r2
 
 # Handle infinite values (where distance = 0)
-r2_weighted[is.infinite(r2_weighted)] <- NA
+r2_weighted[is.infinite(r2_weighted)] <- 0
+
+# Normalize layers to sum to 1
+# Calculate sums for all layers at once
+layer_sums <- global(r2_weighted, "sum", na.rm = TRUE)
+
+# Normalize each layer by its sum
+r2_norm <- r2_weighted / as.numeric(layer_sums[[1]])
+
+# Verify normalization
+#layer_sums <- global(r2_norm, "sum", na.rm = TRUE)
+#print(layer_sums)  # Should all be 1.0
 
 ## sample plot
 #plot(r2_weighted[["FBM"]])
@@ -195,10 +206,11 @@ province_populations <- terra::extract(r2, drc_provinces, fun = sum, na.rm = TRU
 drc_provinces$population <- province_populations[,2]  # Second column has the sums
 
 # Extract weighted travel probability densities for each province
-province_weights <- terra::extract(r2_weighted, drc_provinces, fun = sum, na.rm = TRUE)
-drc_provinces$pop_weights <- province_weights[,2]
+province_weights <- terra::extract(r2_norm, drc_provinces, fun = sum, na.rm = TRUE)
+drc_provinces <- drc_provinces |> 
+  bind_cols(province_weights |> select(-ID))
 
-drc_provinces |> select(name, population, pop_weights) |> View()
+drc_provinces |> select(NOM, FIH, GOM, FBM) |> View()
 
 ##################################################################################
 ## ALTERNATIVE METHOD: DEFINE A RADIUS OF X KILOMETERS AROUND EVENT

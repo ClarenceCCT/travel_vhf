@@ -302,5 +302,24 @@ province_weighted_plot <- drc_provinces |>
 province_weighted_plot
 
 ##################################################################################
+## INTERSECT WITH HEALTH ZONE BOUNDARIES TO CALCULATE HEALTH ZONE POPULATION
+##################################################################################
+if(st_crs(drc_healthzones) != crs(r2)) {
+  drc_healthzones <- st_transform(drc_healthzones, crs(r2))
+}
+
+# Extract population estimates for each health zone
+hz_populations <- terra::extract(r2, drc_healthzones, fun = sum, na.rm = TRUE)
+
+# Add to health zone data
+drc_healthzones$population <- hz_populations[,2]  # Second column has the sums
+
+# tabulate populations
+my_healthzones <- c("Mweka", "Bulape", "Mushenge", "Dekese")
+drc_healthzones |> 
+  filter(Nom %in% my_healthzones) |> 
+  select(Nom, PROVINCE, population)
+
+##################################################################################
 ## ALTERNATIVE METHOD: DEFINE A RADIUS OF X KILOMETERS AROUND EVENT
 ##################################################################################

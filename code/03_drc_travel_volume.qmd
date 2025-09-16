@@ -90,6 +90,14 @@ drc_monthly |>
 ```
 
 ```{r}
+## mean monthly travel volume
+drc_monthly |> 
+  select(year, month, volume) |> 
+  group_by(year) |> 
+  summarise(monthly_mean = mean(volume))
+```
+
+```{r}
 ## travel volume by source airport
 drc_monthly_airport <- drc_arrivals |> 
   group_by(orig, year, month, ym, date) |> 
@@ -109,5 +117,5 @@ drc_airport_percents <- drc_monthly_airport |>
   )
 
 ## save
-saveRDS(drc_airport_percents, file = here("output", "drc_airport_percents.rds"))
+#saveRDS(drc_airport_percents, file = here("output", "drc_airport_percents.rds"))
 ```

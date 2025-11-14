@@ -1,11 +1,11 @@
 ## RAD IATA data folder
-iata_path_rad <- "D:/DCAP_PACD/Group/RAD_DER/travel_data/iata"
+iata_path_rad <- "W:/DCAP_PACD/Group/RAD_DER/travel_data/iata"
 
 ## DCAP IATA data folder 
-iata_path_dcap <- "D:/DCAP_PACD/PUBLIC/IATA/"
+iata_path_dcap <- "W:/DCAP_PACD/PUBLIC/IATA/"
 
 ## save path
-save_path_rad <- "D:/DCAP_PACD/Group/RAD_DER/vhf"
+save_path_rad <- "W:/DCAP_PACD/Group/RAD_DER/vhf"
 
 ## function to import travel data for specific airports
 import_iata <- function(x, origcodes, destcodes) { #origcodes and destcodes are vectors of 3-letter airport codes for origin and destination countries

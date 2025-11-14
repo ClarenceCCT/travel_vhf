@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DRC travel volume</title>
+<title>ETH travel volume</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,16 +57,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="drc_travel_volume_files/libs/clipboard/clipboard.min.js"></script>
-<script src="drc_travel_volume_files/libs/quarto-html/quarto.js"></script>
-<script src="drc_travel_volume_files/libs/quarto-html/popper.min.js"></script>
-<script src="drc_travel_volume_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="drc_travel_volume_files/libs/quarto-html/anchor.min.js"></script>
-<link href="drc_travel_volume_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="drc_travel_volume_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="drc_travel_volume_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="drc_travel_volume_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="drc_travel_volume_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="eth_travel_volume_files/libs/clipboard/clipboard.min.js"></script>
+<script src="eth_travel_volume_files/libs/quarto-html/quarto.js"></script>
+<script src="eth_travel_volume_files/libs/quarto-html/popper.min.js"></script>
+<script src="eth_travel_volume_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="eth_travel_volume_files/libs/quarto-html/anchor.min.js"></script>
+<link href="eth_travel_volume_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="eth_travel_volume_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="eth_travel_volume_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="eth_travel_volume_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="eth_travel_volume_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">DRC travel volume</h1>
+<h1 class="title">ETH travel volume</h1>
 </div>
 
 
@@ -96,8 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="travel-volume-from-drc-to-canada" class="level2">
-<h2 class="anchored" data-anchor-id="travel-volume-from-drc-to-canada">Travel volume from DRC to Canada</h2>
+<section id="travel-volume-from-eth-to-canada" class="level2">
+<h2 class="anchored" data-anchor-id="travel-volume-from-eth-to-canada">Travel volume from ETH to Canada</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -138,20 +138,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## load IATA travel volumes for past 24 months</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="fu">paste</span>(save_path_rad, <span class="st">"drc_arrivals.rds"</span>, <span class="at">sep =</span> <span class="st">"/"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>drc_arrivals <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(filepath)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="fu">paste</span>(save_path_rad, <span class="st">"eth_arrivals.rds"</span>, <span class="at">sep =</span> <span class="st">"/"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>eth_arrivals <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(filepath)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## aggregate to monthly data</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>drc_monthly <span class="ot">&lt;-</span> drc_arrivals <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>eth_monthly <span class="ot">&lt;-</span> eth_arrivals <span class="sc">|&gt;</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month, ym, date) <span class="sc">|&gt;</span> </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">volume =</span> <span class="fu">sum</span>(npass))</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## flag months of interest</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>drc_monthly <span class="ot">&lt;-</span> drc_monthly <span class="sc">|&gt;</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>eth_monthly <span class="ot">&lt;-</span> eth_monthly <span class="sc">|&gt;</span> </span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">period =</span> <span class="fu">if_else</span>(month <span class="sc">==</span> <span class="st">"09"</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="st">"10"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>my_fills <span class="ot">&lt;-</span> scico<span class="sc">::</span><span class="fu">scico</span>(<span class="dv">2</span>, <span class="at">palette =</span> <span class="st">"lipari"</span>, <span class="at">begin =</span> <span class="fl">0.2</span>, <span class="at">end =</span> <span class="fl">0.8</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## plot</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>drc_monthly <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>eth_monthly <span class="sc">|&gt;</span> </span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> volume, <span class="at">fill =</span> <span class="fu">factor</span>(period))) <span class="sc">+</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_fills) <span class="sc">+</span></span>
@@ -178,13 +178,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="drc_travel_volume_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="864"></p>
+<p><img src="eth_travel_volume_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
 </div>
@@ -192,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>drc_monthly <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eth_monthly <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, volume) <span class="sc">|&gt;</span> </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -208,152 +209,216 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">2023-07</td>
-<td style="text-align: left;">2023</td>
-<td style="text-align: left;">07</td>
-<td style="text-align: right;">1036</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2023-08</td>
-<td style="text-align: left;">2023</td>
-<td style="text-align: left;">08</td>
-<td style="text-align: right;">1666</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">2023-09</td>
 <td style="text-align: left;">2023</td>
 <td style="text-align: left;">09</td>
-<td style="text-align: right;">1494</td>
+<td style="text-align: right;">2004</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2023-10</td>
 <td style="text-align: left;">2023</td>
 <td style="text-align: left;">10</td>
-<td style="text-align: right;">865</td>
+<td style="text-align: right;">1824</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2023-11</td>
 <td style="text-align: left;">2023</td>
 <td style="text-align: left;">11</td>
-<td style="text-align: right;">970</td>
+<td style="text-align: right;">2298</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2023-12</td>
 <td style="text-align: left;">2023</td>
 <td style="text-align: left;">12</td>
-<td style="text-align: right;">810</td>
+<td style="text-align: right;">1503</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024-01</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">01</td>
-<td style="text-align: right;">755</td>
+<td style="text-align: right;">1272</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2024-02</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">02</td>
-<td style="text-align: right;">549</td>
+<td style="text-align: right;">1666</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024-03</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">03</td>
-<td style="text-align: right;">468</td>
+<td style="text-align: right;">1758</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2024-04</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">04</td>
-<td style="text-align: right;">565</td>
+<td style="text-align: right;">875</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024-05</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">05</td>
-<td style="text-align: right;">621</td>
+<td style="text-align: right;">1393</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2024-06</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">06</td>
-<td style="text-align: right;">888</td>
+<td style="text-align: right;">2118</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024-07</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">07</td>
-<td style="text-align: right;">1120</td>
+<td style="text-align: right;">2338</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2024-08</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">08</td>
-<td style="text-align: right;">1037</td>
+<td style="text-align: right;">1748</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024-09</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">09</td>
-<td style="text-align: right;">842</td>
+<td style="text-align: right;">1956</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2024-10</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">10</td>
-<td style="text-align: right;">766</td>
+<td style="text-align: right;">1962</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024-11</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">11</td>
-<td style="text-align: right;">549</td>
+<td style="text-align: right;">1433</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2024-12</td>
 <td style="text-align: left;">2024</td>
 <td style="text-align: left;">12</td>
-<td style="text-align: right;">700</td>
+<td style="text-align: right;">2053</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2025-01</td>
 <td style="text-align: left;">2025</td>
 <td style="text-align: left;">01</td>
-<td style="text-align: right;">669</td>
+<td style="text-align: right;">1470</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2025-02</td>
 <td style="text-align: left;">2025</td>
 <td style="text-align: left;">02</td>
-<td style="text-align: right;">325</td>
+<td style="text-align: right;">1597</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2025-03</td>
 <td style="text-align: left;">2025</td>
 <td style="text-align: left;">03</td>
-<td style="text-align: right;">364</td>
+<td style="text-align: right;">1228</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2025-04</td>
 <td style="text-align: left;">2025</td>
 <td style="text-align: left;">04</td>
-<td style="text-align: right;">373</td>
+<td style="text-align: right;">1405</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2025-05</td>
 <td style="text-align: left;">2025</td>
 <td style="text-align: left;">05</td>
-<td style="text-align: right;">496</td>
+<td style="text-align: right;">2130</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2025-06</td>
 <td style="text-align: left;">2025</td>
 <td style="text-align: left;">06</td>
-<td style="text-align: right;">558</td>
+<td style="text-align: right;">2239</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025-07</td>
+<td style="text-align: left;">2025</td>
+<td style="text-align: left;">07</td>
+<td style="text-align: right;">2067</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025-08</td>
+<td style="text-align: left;">2025</td>
+<td style="text-align: left;">08</td>
+<td style="text-align: right;">2020</td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## mean monthly travel volume</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>eth_monthly <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, volume) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">monthly_mean =</span> <span class="fu">mean</span>(volume))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  year  monthly_mean
+  &lt;fct&gt;        &lt;dbl&gt;
+1 2023         1907.
+2 2024         1714.
+3 2025         1770.</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## travel volume by source airport</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>eth_monthly_airport <span class="ot">&lt;-</span> eth_arrivals <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(orig, year, month, ym, date) <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">volume =</span> <span class="fu">sum</span>(npass))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>eth_monthly_airport <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(ym, year ,month, date), <span class="at">names_from =</span> orig, <span class="at">values_from =</span> volume)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 24 × 20
+# Groups:   year, month, ym [24]
+   ym     year  month date         ADD   AMH   ASO   AWA   AXU   BJR   DIR   DSE
+   &lt;chr&gt;  &lt;fct&gt; &lt;fct&gt; &lt;date&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1 2023-… 2023  09    2023-09-15  1897    NA    NA     2    NA     4    14    NA
+ 2 2023-… 2023  10    2023-10-15  1651    NA    NA     3    NA     9    81    NA
+ 3 2023-… 2023  11    2023-11-15  1910    NA    NA    NA    NA    NA    91    NA
+ 4 2023-… 2023  12    2023-12-15  1439    NA    NA    NA    NA    NA    19    NA
+ 5 2024-… 2024  01    2024-01-15  1201    NA    NA    NA    NA     2    37    NA
+ 6 2024-… 2024  02    2024-02-15  1571     2    NA    NA    NA     4    34    NA
+ 7 2024-… 2024  03    2024-03-15  1677    NA    NA    NA    NA    NA    22    NA
+ 8 2024-… 2024  04    2024-04-15   811     2    NA    NA    NA     2    28    NA
+ 9 2024-… 2024  05    2024-05-15  1288    NA    NA    NA    NA    NA    58    NA
+10 2024-… 2024  06    2024-06-15  2029    NA     2    NA    NA    NA    30    NA
+# ℹ 14 more rows
+# ℹ 8 more variables: GDQ &lt;int&gt;, GMB &lt;int&gt;, GOB &lt;int&gt;, JIJ &lt;int&gt;, JIM &lt;int&gt;,
+#   MQX &lt;int&gt;, SHC &lt;int&gt;, SZE &lt;int&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## percentage share of travel from each airport</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>eth_airport_percents <span class="ot">&lt;-</span> eth_monthly_airport <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(orig) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">volume =</span> <span class="fu">sum</span>(volume)) <span class="sc">|&gt;</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> volume <span class="sc">/</span> <span class="fu">sum</span>(volume)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">## save</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#saveRDS(eth_airport_percents, file = here("output", "eth_airport_percents.rds"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 

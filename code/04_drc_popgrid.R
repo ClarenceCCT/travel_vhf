@@ -252,7 +252,8 @@ drc_provinces <- drc_provinces |>
 # identify Kasai province
 drc_provinces <- drc_provinces |> 
   mutate(
-    kasai = factor(if_else(NOM == "Kasaï", 1, 0))
+    #kasai = factor(if_else(NOM == "Kasaï", 1, 0)),
+    ituri = factor(if_else(NOM == "Ituri", 1, 0))
   )
 
 # map
@@ -262,7 +263,7 @@ my_breaks <- c(0, 0.01, 0.1, 1, 10, 100)
 
 province_weighted_map <- drc_provinces |> 
   ggplot() +
-  geom_sf(aes(fill = weighted_prop * 100, color = kasai), size = 0.8) +
+  geom_sf(aes(fill = weighted_prop * 100, color = ituri), size = 0.8) +
   #geom_sf(data = my_coords, fill = "maroon", shape = 22, size = 2) +
   scale_fill_viridis_c(name = "Percentage\n(log scale)", na.value = "transparent",
                        breaks = my_breaks,
@@ -285,7 +286,7 @@ province_weighted_map
 
 province_weighted_plot <- drc_provinces |> 
   ggplot(aes(x = weighted_prop, y = fct_reorder(NOM, weighted_prop))) +
-  geom_col(aes(fill = kasai)) +
+  geom_col(aes(fill = ituri)) +
   geom_text(aes(label = weighted_volume), hjust = -0.5, size = 3) +
   scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
   scale_fill_viridis_d() +
